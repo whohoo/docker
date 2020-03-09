@@ -1,6 +1,4 @@
-test1:pass1:/home/test1:1000:1000
-test2::/home/test2
-test3:pass3:/home/test3
-abc:pass:
-
-test4:pass4:/home/test4
+user1:123456:
+user2:password2:/home/user_folder2:1000:1000
+user3:password3:/home/your_folder3
+user4:password4:/home/your_folder4:1007:1000

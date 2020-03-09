@@ -1,7 +1,7 @@
 FROM alpine:latest
 
-RUN apk add --no-cache vsftpd 
-RUN sed -i "s/#write_enable=YES/write_enable=YES/" /etc/vsftpd/vsftpd.conf \
+RUN apk add --no-cache vsftpd \
+  && sed -i "s/#write_enable=YES/write_enable=YES/" /etc/vsftpd/vsftpd.conf \
   && sed -i "s/anonymous_enable=YES/anonymous_enable=NO/" /etc/vsftpd/vsftpd.conf \
   && sed -i "s/#local_enable=YES/local_enable=YES/" /etc/vsftpd/vsftpd.conf \
   && sed -i "s/#chroot_local_user=YES/chroot_local_user=YES/" /etc/vsftpd/vsftpd.conf \

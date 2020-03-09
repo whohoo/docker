@@ -3,10 +3,12 @@ version: '2'
 services:
   vsftpd:
     build: .
+    container_name: "vsftpd"
     ports:
       - "21:21"
       - "20:20"
     volumes:
       - ./config/:/etc/vsftpd/
-      - /home/wally/ftp:/home/test1
+      - /your/ftp/path1:/home/user1
+      - /your/ftp/path2:/home/user_folder2
     restart: always
