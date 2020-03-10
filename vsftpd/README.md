@@ -19,7 +19,19 @@ When first run the container, it would genrate a `vsftpd.conf` file in `./config
 5. `gid`: optional, your can specify the group's gid. the default value is 100 [users group]
 
 ### Lock some user
-#####To lock:
-`docker-compose exec vsftpd passwd -l XXXXX` **XXXXX** should be replace with your `ftp_name` 
-#####To unlock:
+##### To lock:
+`docker-compose exec vsftpd passwd -l XXXXX`  
+
+**XXXXX** should be replace with your `ftp_name` 
+
+##### To unlock:
 `docker-compose exec vsftpd passwd -u XXXXX`
+
+### In China
+Sometime it can't fetch anything, when run `apk add` in Apline. In that case, you need change `./Dcokerfile` file. please see below:  
+
+```
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories \
+  && apk add --no-cache vsftpd \
+  && ...
+```
