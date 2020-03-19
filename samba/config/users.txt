@@ -1,0 +1,6 @@
+wally:123456:/home/wally:1000:1000
+test6:pass2:/home/test2:1008:1000
+test7:pass3:/home/test3
+abc8:pass:
+
+test9:pass4:/home/test4:1007:1000

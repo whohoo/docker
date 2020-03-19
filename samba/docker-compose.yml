@@ -1,0 +1,16 @@
+version: '2'
+
+services:
+  samba:
+    build:
+      context: .
+      #args:
+        #http_proxy: "http://192.168.15.60:8001"
+    container_name: "samba"
+    ports:
+      - "445:445"
+    volumes:
+     - ./config/:/etc/samba/
+     - /home/wally/docker:/share
+    #- /your/ftp/path2:/home/user_folder2
+    restart: always
