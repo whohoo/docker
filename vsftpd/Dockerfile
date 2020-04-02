@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM alpine:3.11
 
 RUN apk add --no-cache vsftpd \
   && sed -i "s/#write_enable=YES/write_enable=YES/" /etc/vsftpd/vsftpd.conf \

@@ -1,6 +1,7 @@
 #!/bin/sh
 
 uidindex=10001
+namelist=""
 
 for line in `cat /etc/samba/users.txt`; do
   username=`echo $line | cut -f 1 -d ":"`
@@ -41,12 +42,18 @@ for line in `cat /etc/samba/users.txt`; do
            groupname=$found_groupname
          fi
        fi
-       
+       # add system account
        adduser -h "$homepath" -s /bin/false -G "$groupname" -u $uid_def  -D "$username"
        echo "$username:$password" | chpasswd 1 > /dev/null
+       # add samba account
+       echo -e "$password\n$password" | pdbedit -a -t -u $username
+       namelist="$namelist $username,"
+       echo $namelist
     else
        echo "user '$username' is exist."
     fi
     
   fi
 done
+
+sed -i "s/valid users = mary fred/valid users = ${namelist%?}/" /etc/smb.conf.default

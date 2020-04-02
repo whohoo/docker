@@ -41,7 +41,7 @@ for line in `cat /etc/vsftpd/users.txt`; do
            groupname=$found_groupname
          fi
        fi
-       
+       # add system account
        adduser -h "$homepath" -s /bin/false -G "$groupname" -u $uid_def  -D "$username"
        echo "$username:$password" | chpasswd 1 > /dev/null
     else
