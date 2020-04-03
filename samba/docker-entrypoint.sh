@@ -6,4 +6,7 @@ fi
 
 ./add-smb-users.sh
 
-smbd -i -F -S
+smbd
+
+# keep the script running
+while true; do sleep 1000; done

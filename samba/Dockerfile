@@ -16,4 +16,3 @@ ADD ./docker-entrypoint.sh ./add-smb-users.sh  /
 EXPOSE 445/tcp
 
 CMD /docker-entrypoint.sh
-#CMD top

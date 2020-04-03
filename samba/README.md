@@ -41,10 +41,12 @@ When first run the container, it would genrate a `smb.conf` file in `./config/` 
 - **`create mask`** or **`directory mask`**: 用户新建的文件或目录所拥有的文件权限
 - **`available`**: 是否启用共享目录, `yes|no`
 
-**注**: 
+## **注**: 
 
 1. 除了要指定`writable`, `write list`等属性外, unix文件用户权限也同样需要同等的相应的权限方可访问与读写
 2. 除了需要在docker容器中添加用户外`adduser`, 还需要通过`smbpasswd `或`pdbedit`添加用户, 也就是说samba里的用户需要在系统里有对应的用户
+3. Samba 4.7(Alpine 3.7) 版本可运行`smb -F -S`没问题, Samba 4.8(Alpine 3.8)版本后, 一定要加上参数**`-i`**, 如`smbd -i -F -S`, 如果省去-i参数, 则smb会弹出`exit_daemon: daemon failed to start: Failed to create session, error code 1`错误提示. 但加上**`-i`**参数后, 非windows系统无法连上共享服务器, 现在的解决方式是运行`smbd` 不带任何参数, 然后加上 `while true; do sleep 1000; done` 这命令让程序持续执行. 否则docker container会因为命令执行完成退出. 
+4. 如果不喜欢上述的解决方式, 可以修改`Dockerfile`文件第三行, 修改为`FROM alpine:3.7` , 然后修改`docker-entrypoint.sh`文件, 把`smdb` 加上参数, 如:`smdb -F  -S`, 再把`while true; do sleep 1000; done`这代码删除就可以了.
 
 
 ### Lock some user
