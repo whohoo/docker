@@ -1,6 +1,6 @@
 #!/bin/sh
 
-uidindex=2000
+uidindex=10000
 
 for line in `cat /etc/vsftpd/users.txt`; do
   username=`echo $line | cut -f 1 -d ":"`
@@ -26,6 +26,7 @@ for line in `cat /etc/vsftpd/users.txt`; do
        if [ -z $gid_def ]; then
          groupname="users"
        else
+         found_groupname=""
          for line2 in `cat /etc/group`; do
            gid=`echo $line2 | cut -f 3 -d ":"`
            if [ $gid_def -eq $gid ]; then
@@ -41,7 +42,7 @@ for line in `cat /etc/vsftpd/users.txt`; do
            groupname=$found_groupname
          fi
        fi
-       # add system account
+       
        adduser -h "$homepath" -s /bin/false -G "$groupname" -u $uid_def  -D "$username"
        echo "$username:$password" | chpasswd 1 > /dev/null
     else

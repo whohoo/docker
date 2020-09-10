@@ -13,6 +13,6 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
 ADD ./docker-entrypoint.sh ./add-smb-users.sh  /
 
 
-EXPOSE 445/tcp
+# EXPOSE 445/tcp
 
-CMD /docker-entrypoint.sh
+ENTRYPOINT [ "/docker-entrypoint.sh" ] 

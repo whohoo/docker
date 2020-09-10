@@ -1,6 +1,7 @@
-FROM alpine:3.11
+FROM alpine:latest
 
-RUN apk add --no-cache vsftpd \
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories \
+  && apk add --no-cache vsftpd \
   && sed -i "s/#write_enable=YES/write_enable=YES/" /etc/vsftpd/vsftpd.conf \
   && sed -i "s/anonymous_enable=YES/anonymous_enable=NO/" /etc/vsftpd/vsftpd.conf \
   && sed -i "s/#local_enable=YES/local_enable=YES/" /etc/vsftpd/vsftpd.conf \
@@ -16,8 +17,7 @@ RUN apk add --no-cache vsftpd \
 
 COPY docker-entrypoint.sh add-ftp-users.sh /
 
-VOLUME ["/etc/vsftpd-conf", "/var/log/", "/home/"]
+VOLUME [ "/var/log/", "/home/"]
 
-EXPOSE 20 21
 
-CMD /docker-entrypoint.sh
+ENTRYPOINT [ "/docker-entrypoint.sh" ] 

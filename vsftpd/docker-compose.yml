@@ -1,14 +1,29 @@
-version: '2'
+version: '3.5'
 
 services:
   vsftpd:
     build: .
+    image: alpine-vsftpd:latest
     container_name: "vsftpd"
     ports:
       - "21:21"
       - "20:20"
     volumes:
+      - vsftp_home:/home
+      - vsftp_log:/var/log
       - ./config/:/etc/vsftpd/
       - /your/ftp/path1:/home/user1
       - /your/ftp/path2:/home/user_folder2
     restart: always
+
+volumes: 
+  vsftp_home:
+  vsftp_log:
+
+networks:
+  default:
+    name: vsftpd
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.29.0.0/30

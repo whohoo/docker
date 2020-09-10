@@ -1,9 +1,9 @@
-version: '2'
+version: '3.5'
 
 services:
   samba:
-    build:
-      context: .
+    build: .
+    image: alpine-samba:3.11
 
     container_name: "samba"
     ports:
@@ -13,3 +13,11 @@ services:
      - /your/samba/path1:/share/user1
      - /your/samba/path2:/share/user_folder2
     restart: always
+
+networks:
+  default:
+    name: samba
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.30.0.0/30
