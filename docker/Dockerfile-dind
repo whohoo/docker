@@ -1,2 +1,2 @@
-FROM docker:27.1.2-dind-alpine3.20
+FROM docker:27-dind
 
