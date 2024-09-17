@@ -2,6 +2,7 @@ FROM node:20-alpine
 
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories \
   && apk add --no-cache tzdata \
-  && npm install -g pnpm
+  && npm config set registry https://registry.npmmirror.com \
+  && npm install -g pnpm 
 
 ENV TZ=Asia/Shanghai
