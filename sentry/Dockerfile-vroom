@@ -1,0 +1,1 @@
+FROM getsentry/snuba:24.11.0
