@@ -1,0 +1,6 @@
+FROM python:3.13
+
+RUN sed -i "s@http://deb.debian.org@https://mirrors.tuna.tsinghua.edu.cn@g" /etc/apt/sources.list.d/debian.sources \
+  && apt update && apt install -y ffmpeg 
+
+ENV TZ=Asia/Shanghai
